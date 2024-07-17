@@ -1,0 +1,76 @@
+swagger: '2.0'
+info:
+  version: 1.0.0
+  title: Following System API
+host: localhost:3000
+schemes:
+  - http
+paths:
+  /follow:
+    post:
+      summary: Follow a user
+      parameters:
+        - in: body
+          name: body
+          schema:
+            type: object
+            properties:
+              user_id:
+                type: integer
+              follow_id:
+                type: integer
+            required:
+              - user_id
+              - follow_id
+      responses:
+        201:
+          description: Followed successfully
+  /unfollow:
+    post:
+      summary: Unfollow a user
+      parameters:
+        - in: body
+          name: body
+          schema:
+            type: object
+            properties:
+              user_id:
+                type: integer
+              follow_id:
+                type: integer
+            required:
+              - user_id
+              - follow_id
+      responses:
+        200:
+          description: Unfollowed successfully
+  /followers/{user_id}:
+    get:
+      summary: Get followers of a user
+      parameters:
+        - in: path
+          name: user_id
+          type: integer
+          required: true
+      responses:
+        200:
+          description: A list of followers
+  /mutual_followers:
+    post:
+      summary: Get mutual followers of two users
+      parameters:
+        - in: body
+          name: body
+          schema:
+            type: object
+            properties:
+              user_id1:
+                type: integer
+              user_id2:
+                type: integer
+            required:
+              - user_id1
+              - user_id2
+      responses:
+        200:
+          description: A list of mutual followers
